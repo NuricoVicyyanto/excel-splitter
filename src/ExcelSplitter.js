@@ -24,7 +24,7 @@ const ExcelSplitter = () => {
 
   const splitExcelFileAndZip = async () => {
     if (!file) {
-      alert("Pilih file Excel terlebih dahulu!");
+      alert("Pilih file terlebih dahulu!");
       return;
     }
 
@@ -43,7 +43,7 @@ const ExcelSplitter = () => {
       const workbook = XLSX.read(data, { type: 'array' });
 
       if (!workbook || !workbook.SheetNames.length) {
-        alert("File Excel tidak valid atau kosong.");
+        alert("File tidak valid atau kosong.");
         setIsLoading(false); // Set loading menjadi false jika ada error
         return;
       }
@@ -98,13 +98,13 @@ const ExcelSplitter = () => {
           <input
             type="file"
             onChange={handleFileChange}
-            accept=".xlsx"
+            accept=".xlsx,.xls,.csv"
             style={{ display: 'none' }}
             id="upload-file"
           />
           <label htmlFor="upload-file">
             <Button variant="contained" component="span" fullWidth disabled={isLoading}>
-              Pilih File Excel
+              Pilih File Excel/CSV
             </Button>
           </label>
         </Grid>
@@ -142,6 +142,12 @@ const ExcelSplitter = () => {
       <Backdrop style={{ zIndex: 1200 }} open={isLoading}>
         <CircularProgress size={60} thickness={5} />
       </Backdrop>
+
+      {/* Keterangan Developer */}
+      <Typography variant="body2" color="textSecondary" align="center" style={{ marginTop: '30px' }}>
+        Dibuat oleh <strong>VICi</strong> - Software Development House. Versi saat ini: <strong>0.1.2</strong>. 
+        Update terbaru: <em>Support untuk memecah file data dengan format <strong>XLSX, XLS, dan CSV</strong></em>.
+      </Typography>
     </Container>
   );
 };
